@@ -19,29 +19,31 @@ PREPPED_SEG_PATH = "./prepped_data/train_segmentation/"
 
 # Iterate over all .npy files in train folder
 for filename in os.listdir(PREPPED_IMG_PATH):
-    image = cv2.imread(os.path.join(PREPPED_IMG_PATH, filename))
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    mask = cv2.imread(os.path.join(PREPPED_SEG_PATH, filename))
+    if not filename.startswith("augmented"):
+        image = cv2.imread(os.path.join(PREPPED_IMG_PATH, filename))
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        mask = cv2.imread(os.path.join(PREPPED_SEG_PATH, filename))
 
-    transformed = transform1(image=image, mask=mask)
-    transformed_image = Image.fromarray(transformed['image'])
-    transformed_mask = Image.fromarray(transformed['mask'])
+        transformed = transform1(image=image, mask=mask)
+        transformed_image = Image.fromarray(transformed['image'])
+        transformed_mask = Image.fromarray(transformed['mask'])
 
-    save_path = os.path.join(PREPPED_IMG_PATH, "augmented1_"+os.path.splitext(filename)[0] + ".png")
-    transformed_image.save(save_path)
-    save_path = os.path.join(PREPPED_SEG_PATH, "augmented1_"+os.path.splitext(filename)[0] + ".png")
-    transformed_mask.save(save_path)
+        save_path = os.path.join(PREPPED_IMG_PATH, "augmented1_"+os.path.splitext(filename)[0] + ".png")
+        transformed_image.save(save_path)
+        save_path = os.path.join(PREPPED_SEG_PATH, "augmented1_"+os.path.splitext(filename)[0] + ".png")
+        transformed_mask.save(save_path)
 
 for filename in os.listdir(PREPPED_IMG_PATH):
-    image = cv2.imread(os.path.join(PREPPED_IMG_PATH, filename))
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    mask = cv2.imread(os.path.join(PREPPED_SEG_PATH, filename))
+    if not filename.startswith("augmented"):
+        image = cv2.imread(os.path.join(PREPPED_IMG_PATH, filename))
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        mask = cv2.imread(os.path.join(PREPPED_SEG_PATH, filename))
 
-    transformed = transform2(image=image, mask=mask)
-    transformed_image = Image.fromarray(transformed['image'])
-    transformed_mask = Image.fromarray(transformed['mask'])
+        transformed = transform2(image=image, mask=mask)
+        transformed_image = Image.fromarray(transformed['image'])
+        transformed_mask = Image.fromarray(transformed['mask'])
 
-    save_path = os.path.join(PREPPED_IMG_PATH, "augmented2_"+os.path.splitext(filename)[0] + ".png")
-    transformed_image.save(save_path)
-    save_path = os.path.join(PREPPED_SEG_PATH, "augmented2_"+os.path.splitext(filename)[0] + ".png")
-    transformed_mask.save(save_path)
+        save_path = os.path.join(PREPPED_IMG_PATH, "augmented2_"+os.path.splitext(filename)[0] + ".png")
+        transformed_image.save(save_path)
+        save_path = os.path.join(PREPPED_SEG_PATH, "augmented2_"+os.path.splitext(filename)[0] + ".png")
+        transformed_mask.save(save_path)
