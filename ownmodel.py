@@ -237,11 +237,11 @@ if __name__ == "__main__":
 
     model = build()
 
-    model.load_weights("./model-04.h5")
+    # model.load_weights("./model-04.h5")
 
 
     # define a callback to save the model after every epoch
-    filepath = "model-{epoch:02d}-dl.h5"
+    filepath = "model-{epoch:02d}-cw.h5"
     checkpoint = ModelCheckpoint(filepath, save_weights_only=True, save_best_only=False)
 
     model = fit(model, train_X, train_y_seg, val_X, val_y_seg, callbacks=[checkpoint])
