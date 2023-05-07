@@ -205,11 +205,11 @@ def build():
 
 def fit(model, X, Y, X_val, Y_val, callbacks):
     # Create the generator
-    batch_size = 8
+    batch_size = 16
     train_gen = data_generator(X, Y, batch_size)
 
     # Train the model using the generator
-    model.fit(train_gen, steps_per_epoch=len(X)//batch_size, epochs=30, validation_data=(X_val, Y_val), callbacks=callbacks)
+    model.fit(train_gen, steps_per_epoch=len(X)//batch_size, epochs=10, validation_data=(X_val, Y_val), callbacks=callbacks)
     return model
 
 

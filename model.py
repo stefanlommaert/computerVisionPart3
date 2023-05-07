@@ -23,4 +23,4 @@ model.train(train_images="prepped_data/train_images/",
             val_annotations="prepped_data/val_segmentation/",
             checkpoints_path="checkpoints2/vgg_unet_1",
             epochs=60,
-            validate=True)
+            validate=True,)
