@@ -25,7 +25,7 @@ for data, prepped_data in [(IMG_PATH, PREPPED_IMG_PATH), (SEG_PATH, PREPPED_SEG_
 
             # Resize image
             img = Image.fromarray(img)
-            img = img.resize(IMG_SIZE, resample=Image.NEAREST)
+            img = img.resize(IMG_SIZE, resample=Image.BILINEAR)
             # Save resized image
             save_path = os.path.join(prepped_data, os.path.splitext(filename)[0] + ".png")
             img.save(save_path)
