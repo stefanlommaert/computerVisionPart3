@@ -13,12 +13,15 @@ transform = A.Compose([
     ], p=0.5),
     A.OneOf([
         A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2),
-        A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20)
+        A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=15, val_shift_limit=10)
     ], p=0.5),
     A.Rotate(limit=20, border_mode=cv2.BORDER_REFLECT_101, p=0.5),
     A.RandomResizedCrop(height = 256, width = 256, scale = (0.70, 1), ratio = (0.95, 1.05), p = 0.5)
 ])
 
+# transform = A.Compose([
+#     A.HorizontalFlip(p=1),
+# ])
 
 PREPPED_IMG_PATH = "./prepped_data/train_images/"
 PREPPED_SEG_PATH = "./prepped_data/train_segmentation/"
