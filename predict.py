@@ -2,10 +2,15 @@ from keras_segmentation.predict import predict, predict_multiple
 
 class_names = ['bg', "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
 
-colors = [(0, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255), 
-          (128, 0, 0), (0, 128, 0), (0, 0, 128), (128, 128, 0), (128, 0, 128), (0, 128, 128), 
-          (64, 0, 0), (0, 64, 0), (0, 0, 64), (64, 64, 0), (64, 0, 64), (0, 64, 64), 
-          (192, 0, 0), (0,192,0)]
+# colors = [(0, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255), 
+#           (128, 0, 0), (0, 128, 0), (0, 0, 128), (128, 128, 0), (128, 0, 128), (0, 128, 128), 
+#           (64, 0, 0), (0, 64, 0), (0, 0, 64), (64, 64, 0), (64, 0, 64), (0, 64, 64), 
+#           (192, 0, 0), (0,192,0)]
+
+colors = [(0, 0, 0), (1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5), (6, 6, 6), (7, 7, 7), (8, 8, 8),
+           (9, 9, 9), (10, 10, 10), (11, 11, 11), (12, 12, 12), (13, 13, 13), (14, 14, 14), (15, 15, 15),
+             (16, 16, 16), (17, 17, 17), (18, 18, 18), (19, 19, 19), (20, 20, 20)]
+
 
 color_dict = {
     "background": (0, 0, 0),
@@ -61,15 +66,32 @@ from ownmodel import dice_loss, focal_tversky_loss
 #     # # back to the original size
 #     # return np.array([cv2.resize(img, size) for img, size in zip(X, sizes)])
 
-print(predict( 
-	checkpoints_path="checkpoints3/resnet_unet_1.55", 
-	inp="prepped_data/val_images/augmented_0_train_0.png", 
-	out_fname="outputfinal.png",
+from keras_segmentation.models.unet import resnet50_unet
+
+model = resnet50_unet(n_classes=21, input_height=256, input_width=256)
+
+model.load_weights("checkpoints3/resnet_unet_1.55")
+
+
+# predict( 
+# 	checkpoints_path="checkpoints3/resnet_unet_1.55", 
+# 	inp="prepped_data/val_images/augmented_0_train_0.png", 
+# 	out_fname="outputfinal.png",
+# 	class_names=class_names,
+#     colors= colors,
+# 	prediction_height=128,
+#     prediction_width=128
+# )
+
+predict( 
+	model = model, 
+	inp="prepped_data/val_images/train_5.png", 
+	out_fname="outputfinall.png",
 	class_names=class_names,
     colors= colors,
 	prediction_height=128,
     prediction_width=128
-)[3])
+)
 
 
 # predict_multiple( 
